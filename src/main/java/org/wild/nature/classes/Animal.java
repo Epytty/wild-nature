@@ -1,32 +1,34 @@
 package org.wild.nature.classes;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.wild.nature.enums.AnimalActivity;
+import org.wild.nature.service.Activity;
+
+import java.util.Random;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public abstract class Animal {
+@RequiredArgsConstructor
+public abstract class Animal implements Activity {
 
-    private final String type ;
+    private final String type;
     private AnimalActivity activity;
+    protected AnimalActivity[] availableActivities;
 
-    public Animal(String type) {
-        this.type = type;
-        addActivity();
+    @Override
+    public void performActivity(AnimalActivity activity) {
+        this.activity = activity;
+    }
+
+    public void setRandomActivity() {
+        AnimalActivity activity = availableActivities[new Random().nextInt(availableActivities.length)];
+        performActivity(activity);
     }
 
     @Override
     public String toString() {
         return type;
-    }
-
-    public abstract Runnable[] getAvailableActivities();
-
-    public void addActivity() {
-        Runnable[] actvities = getAvailableActivities();
-        actvities[(int)(Math.random() * actvities.length)].run();
     }
 }

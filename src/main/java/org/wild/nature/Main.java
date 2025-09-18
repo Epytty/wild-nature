@@ -18,14 +18,7 @@ public class Main {
         animals.addAll(addAnimals(Beaver::new, 2));
         animals.addAll(addAnimals(Fish::new, 3));
 
-        String table = "| %-12s | %-12s |%n";
-        System.out.format("-------------------------------%n");
-        System.out.format(table, "Животное",  "Занятие");
-        System.out.format("-------------------------------%n");
-        animals.forEach(animal -> {
-            System.out.format(table, animal, animal.getActivity().getDisplayValue());
-            System.out.format("-------------------------------%n");
-        });
+        printAnimalsTable(animals);
     }
 
     private static <T extends Animal> List<T> addAnimals(Function<String, T> constructor, int count) {
@@ -34,5 +27,16 @@ public class Main {
             animals.add(constructor.apply(String.valueOf(i)));
         }
         return animals;
+    }
+
+    private static void printAnimalsTable(List<Animal> animals) {
+        String table = "| %-12s | %-12s |%n";
+        System.out.format("-------------------------------%n");
+        System.out.format(table, "Животное",  "Занятие");
+        System.out.format("-------------------------------%n");
+        animals.forEach(animal -> {
+            System.out.format(table, animal, animal.getActivity().getDisplayValue());
+            System.out.format("-------------------------------%n");
+        });
     }
 }
