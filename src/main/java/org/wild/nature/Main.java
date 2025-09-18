@@ -4,6 +4,7 @@ import org.wild.nature.classes.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 
 public class Main {
@@ -18,7 +19,7 @@ public class Main {
         animals.addAll(addAnimals(Beaver::new, 2));
         animals.addAll(addAnimals(Fish::new, 3));
 
-        startAnimalsThreads(animals);
+        updateAnimalsThreads(animals);
         for (int i = 0; i < 10; i++) {
             printAnimalsTable(animals);
             try {
@@ -50,14 +51,15 @@ public class Main {
         });
     }
 
-    private static List<Thread> startAnimalsThreads(List<Animal> animals) {
+    private static List<Thread> updateAnimalsThreads(List<Animal> animals) {
         List<Thread> animalsThreads = new ArrayList<>();
         animals.forEach(animal -> {
             Thread thread = new Thread(() -> {
                 while (!Thread.currentThread().isInterrupted()) {
                     animal.setRandomActivity();
                     try {
-                        Thread.sleep(2000);
+                        Random random = new Random();
+                        Thread.sleep(random.nextInt(2000, 4000));
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
@@ -71,6 +73,6 @@ public class Main {
     }
 
     private static void interruptAnimalsThreads(List<Animal> animals) {
-        startAnimalsThreads(animals).forEach(Thread::interrupt);
+        updateAnimalsThreads(animals).forEach(Thread::interrupt);
     }
 }
