@@ -18,7 +18,17 @@ public class Main {
         animals.addAll(addAnimals(Beaver::new, 2));
         animals.addAll(addAnimals(Fish::new, 3));
 
-        printAnimalsTable(animals);
+        startAnimalsThreads(animals);
+        for (int i = 0; i < 10; i++) {
+            printAnimalsTable(animals);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        interruptAnimalsThreads(animals);
     }
 
     private static <T extends Animal> List<T> addAnimals(Function<String, T> constructor, int count) {
@@ -38,5 +48,29 @@ public class Main {
             System.out.format(table, animal, animal.getActivity().getDisplayValue());
             System.out.format("-------------------------------%n");
         });
+    }
+
+    private static List<Thread> startAnimalsThreads(List<Animal> animals) {
+        List<Thread> animalsThreads = new ArrayList<>();
+        animals.forEach(animal -> {
+            Thread thread = new Thread(() -> {
+                while (!Thread.currentThread().isInterrupted()) {
+                    animal.setRandomActivity();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            });
+            thread.setDaemon(true);
+            thread.start();
+            animalsThreads.add(thread);
+        });
+        return animalsThreads;
+    }
+
+    private static void interruptAnimalsThreads(List<Animal> animals) {
+        startAnimalsThreads(animals).forEach(Thread::interrupt);
     }
 }

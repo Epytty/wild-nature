@@ -14,7 +14,7 @@ import java.util.Random;
 public abstract class Animal implements Activity {
 
     private final String type;
-    private AnimalActivity activity;
+    private volatile AnimalActivity activity;
     protected AnimalActivity[] availableActivities;
 
     @Override
