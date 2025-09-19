@@ -1,11 +1,12 @@
-package org.wild.nature.classes;
+package org.wild.nature.model;
 
 import org.wild.nature.enums.AnimalActivity;
 
-public class Wolf extends Animal {
+public class Bear extends Animal {
 
-    public Wolf(String number) {
-        super("Волк " + number);
+    public Bear(String number) {
+        super("Медведь " + number);
+
         availableActivities = new AnimalActivity[]{
                 AnimalActivity.EATING,
                 AnimalActivity.HUNTING,
@@ -13,7 +14,5 @@ public class Wolf extends Animal {
                 AnimalActivity.WALKING,
                 AnimalActivity.SWIMMING
         };
-
-        setRandomActivity();
     }
 }

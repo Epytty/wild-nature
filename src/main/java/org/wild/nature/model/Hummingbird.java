@@ -1,4 +1,4 @@
-package org.wild.nature.classes;
+package org.wild.nature.model;
 
 import org.wild.nature.enums.AnimalActivity;
 
@@ -11,7 +11,5 @@ public class Hummingbird extends Animal {
                 AnimalActivity.EATING,
                 AnimalActivity.SLEEPING,
         };
-
-        setRandomActivity();
     }
 }

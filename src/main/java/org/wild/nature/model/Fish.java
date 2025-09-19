@@ -1,18 +1,15 @@
-package org.wild.nature.classes;
+package org.wild.nature.model;
 
 import org.wild.nature.enums.AnimalActivity;
 
-public class Beaver extends Animal {
+public class Fish extends Animal {
 
-    public Beaver(String number) {
-        super("Бобёр " + number);
+    public Fish(String number) {
+        super("Рыба " + number);
         availableActivities = new AnimalActivity[]{
                 AnimalActivity.EATING,
                 AnimalActivity.SLEEPING,
-                AnimalActivity.WALKING,
                 AnimalActivity.SWIMMING
         };
-
-        setRandomActivity();
     }
 }

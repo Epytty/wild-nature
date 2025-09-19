@@ -1,18 +1,17 @@
-package org.wild.nature.classes;
+package org.wild.nature.model;
 
 import org.wild.nature.enums.AnimalActivity;
 
-public class Peacock extends Animal {
+public class Wolf extends Animal {
 
-    public Peacock(String number) {
-        super("Павлин " + number);
+    public Wolf(String number) {
+        super("Волк " + number);
         availableActivities = new AnimalActivity[]{
-                AnimalActivity.FLYING,
                 AnimalActivity.EATING,
+                AnimalActivity.HUNTING,
                 AnimalActivity.SLEEPING,
                 AnimalActivity.WALKING,
+                AnimalActivity.SWIMMING
         };
-
-        setRandomActivity();
     }
 }

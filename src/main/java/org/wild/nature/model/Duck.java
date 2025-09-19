@@ -1,22 +1,17 @@
-package org.wild.nature.classes;
+package org.wild.nature.model;
 
-import lombok.Setter;
 import org.wild.nature.enums.AnimalActivity;
 
-@Setter
-public class Bear extends Animal {
+public class Duck extends Animal {
 
-    public Bear(String number) {
-        super("Медведь " + number);
-
+    public Duck(String number) {
+        super("Утка " + number);
         availableActivities = new AnimalActivity[]{
+                AnimalActivity.FLYING,
                 AnimalActivity.EATING,
-                AnimalActivity.HUNTING,
                 AnimalActivity.SLEEPING,
                 AnimalActivity.WALKING,
                 AnimalActivity.SWIMMING
         };
-
-        setRandomActivity();
     }
 }
