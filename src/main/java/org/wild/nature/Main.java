@@ -17,7 +17,7 @@ public class Main {
         List<Animal> animals = animalsService.createAnimals();
         List<Thread> animalsThreads = animalsService.updateAnimalsThreads(animals);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             animalsService.printAnimalsTable(animals);
             try {
                 Thread.sleep(2000);

@@ -38,17 +38,18 @@ public class AnimalsServiceImpl implements AnimalsService {
 
     @Override
     public void printAnimalsTable(List<Animal> animals) {
-        String table = "| %-12s | %-12s | %-12s |%n";
-        System.out.format("-------------------------------%n");
+        String table = "| %-16s | %-16s | %-16s |%n";
+        System.out.format("==========================================================%n");
         System.out.format(table, "Животное",  "Занятие", "Прошлое занятие");
-        System.out.format("-------------------------------%n");
+        System.out.format("==========================================================%n");
         animals.forEach(animal -> {
             System.out.format(
                     table, animal,
                     animal.getActivity().getDisplayValue(),
                     activityService.getPreviousActivity(animal.getActivityHistory()).getDisplayValue());
-            System.out.format("-------------------------------%n");
+            System.out.format("----------------------------------------------------------%n");
         });
+        System.out.format("%n%n%n");
     }
 
     @Override
