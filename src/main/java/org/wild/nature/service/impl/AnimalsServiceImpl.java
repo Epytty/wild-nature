@@ -52,12 +52,12 @@ public class AnimalsServiceImpl implements AnimalsService {
     @Override
     public List<Thread> updateAnimalsThreads(List<Animal> animals) {
         List<Thread> animalsThreads = new ArrayList<>();
+        Random random = new Random();
         animals.forEach(animal -> {
             Thread thread = new Thread(() -> {
                 while (!Thread.currentThread().isInterrupted()) {
                     animal.updateActivity(activityService);
                     try {
-                        Random random = new Random();
                         Thread.sleep(random.nextInt(2000, 4000));
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
