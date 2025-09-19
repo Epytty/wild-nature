@@ -12,7 +12,8 @@ public enum AnimalActivity {
     EATING("Ест"),
     WALKING("Ходит"),
     FLYING("Летает"),
-    SWIMMING("Плавает");
+    SWIMMING("Плавает"),
+    NOTHING("Ничего не делает");
 
     private final String displayValue;
 }

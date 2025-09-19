@@ -7,7 +7,6 @@ import org.wild.nature.service.AnimalsService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Function;
 
 @RequiredArgsConstructor
@@ -39,12 +38,15 @@ public class AnimalsServiceImpl implements AnimalsService {
 
     @Override
     public void printAnimalsTable(List<Animal> animals) {
-        String table = "| %-12s | %-12s |%n";
+        String table = "| %-12s | %-12s | %-12s |%n";
         System.out.format("-------------------------------%n");
-        System.out.format(table, "Животное",  "Занятие");
+        System.out.format(table, "Животное",  "Занятие", "Прошлое занятие");
         System.out.format("-------------------------------%n");
         animals.forEach(animal -> {
-            System.out.format(table, animal, animal.getActivity().getDisplayValue());
+            System.out.format(
+                    table, animal,
+                    animal.getActivity().getDisplayValue(),
+                    activityService.getPreviousActivity(animal.getActivityHistory()).getDisplayValue());
             System.out.format("-------------------------------%n");
         });
     }
@@ -52,13 +54,12 @@ public class AnimalsServiceImpl implements AnimalsService {
     @Override
     public List<Thread> updateAnimalsThreads(List<Animal> animals) {
         List<Thread> animalsThreads = new ArrayList<>();
-        Random random = new Random();
         animals.forEach(animal -> {
             Thread thread = new Thread(() -> {
                 while (!Thread.currentThread().isInterrupted()) {
                     animal.updateActivity(activityService);
                     try {
-                        Thread.sleep(random.nextInt(2000, 4000));
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
